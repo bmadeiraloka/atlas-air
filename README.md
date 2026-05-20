@@ -1,42 +1,51 @@
 # atlas-air
 Vibe code exploration for a flight crew company product
 
-Build an interactive iPad UI prototype for "Crew Central" — a unified digital portal for flight crew at Atlas Air.
+Build an interactive iPad UI prototype for "Crew Central" — a unified digital 
+portal for flight crew at Atlas Air.
 
-CONCEPT
-"Ready Before You Are" — the UI shifts mode based on where the crew member is in their day. It anticipates and adapts without being asked.
+CONCEPT: "Ready Before You Are"
+The product shifts mode based on where the crew member is in their day. 
+It anticipates, personalises, and adapts — without being asked.
 
-THREE MODES
-Build a mode switcher with three states. Each mode shows a distinct screen layout.
+VISUAL DIRECTION
+- Dark UI — deep navy (#0A0F1E) base, near-black backgrounds
+- Single amber accent (#E8A020) for primary actions and highlights
+- Cyan (#00C2D1) for AI-related elements only
+- Typography: large serif for headlines, clean sans-serif for UI data
+- No gradients, no decorative elements, no drop shadows
+- Every element earns its place
 
-1. PLAN — pre-shift home screen
-   Next flight card (flight number, gate, departure time)
-   Destination weather (icon + temp)
-   Crew roster (3–4 names, role badges)
+THREE MODES TO SHOW
+1. Plan mode — pre-shift, hotel or crew room. Home screen assembled 
+   before the crew member asks. Shows next flight, gate, weather, 
+   crew briefing. Role-aware: "Captain, AA 204 · JFK → LAX"
 
-2. FLIGHT — active duty screen
-   Time displayed large, full width
-   Single confirmation button — "I'm ready"
-   On tap: transitions to schedule view with gate + crew
+2. Flight mode — active duty. Wake-Up screen. Full screen takeover. 
+   Time large at top. Single amber CTA. Nothing else. 
+   After confirmation — schedule, gate, crew surfaced immediately.
 
-3. REST — post-flight screen
-   Quiet, low-contrast UI
-   Rest window shown (e.g. "8h 40m available")
-   Next duty previewed in small type below
+3. Rest mode — post-flight. Quiet, reduced UI. Next duty cycle 
+   previewed. Rest window calculated automatically.
 
-AI LAYER
-One contextual card, always visible in Plan mode.
-Two suggested actions below it. Dismissable.
-Content is hardcoded — no real AI needed.
+AI CO-PILOT LAYER
+- A cyan-edged card that surfaces contextually — not triggered by the user
+- Shows one insight: gate change, briefing update, or pattern-based suggestion
+- Two pre-surfaced action pills below it
+- Label: "Surfaced before you asked"
 
-ROLE SWITCHER
-Toggle between: Captain / First Officer / Cabin Crew
-Changes the name, role badge, and roster view accordingly.
+INTERACTIONS TO BUILD
+- Mode switcher — Plan / Flight / Rest toggle at the top
+- Wake-Up tap — confirm button triggers transition to schedule view
+- AI card — appears after 2 seconds in Flight mode, dismissable
+- Role switcher — Captain / Cabin Crew / New Joiner, home screen 
+  adapts visibly for each
 
-─────────────────────────────────────────
-TECHNICAL CONSTRAINTS
-- Target viewport: 834 × 1194px (iPad Pro portrait), centered in browser
-- All data is mocked — no real APIs, no backend
-- AI card content is hardcoded, not generated
-- Use realistic placeholder content: Atlas Air flight numbers, real IATA codes
-- All interactions handled in the browser, no build step required
+DEVICE FRAME
+- iPad Pro form factor, portrait orientation
+- Minimal device frame — focus is the screen, not the hardware
+
+FEEL
+Calm. Trusted. Immediate. 
+This is a work tool for people who cannot afford friction. 
+Every interaction should feel like it was designed for 3am.
