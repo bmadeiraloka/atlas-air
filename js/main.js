@@ -33,6 +33,8 @@ function updateClock() {
 }
 updateClock();
 setInterval(updateClock, 10000);
+updateRestCountdown();
+setInterval(updateRestCountdown, 60000);
 
 // ─── Mode switcher ──────────────────────────────────────────
 const modeBtns = document.querySelectorAll('.mode-btn');
@@ -50,6 +52,10 @@ function switchMode(mode) {
   if (mode === 'flight') {
     showWakeup();
     clearTimeout(aiTimers.flight);
+  }
+
+  if (mode === 'rest') {
+    updateRestCountdown();
   }
 
   if (mode === 'plan') {
@@ -140,6 +146,115 @@ document.getElementById('wakeup-cta')?.addEventListener('click', () => {
     }, 4000);
   }, 400);
 });
+
+// ─── Rest countdown ─────────────────────────────────────────
+function updateRestCountdown() {
+  const now = new Date();
+  const restStart = new Date(); restStart.setHours(14, 15, 0, 0);
+  const restEnd   = new Date(); restEnd.setHours(22,  0, 0, 0);
+  const totalMs     = restEnd - restStart;
+  const remainingMs = restEnd - now;
+  const pct = Math.max(0, Math.min(100, ((now - restStart) / totalMs) * 100));
+
+  const fill = document.getElementById('rest-progress-fill');
+  if (fill) fill.style.width = `${pct.toFixed(1)}%`;
+
+  const hero = document.getElementById('rest-hero-time');
+  if (hero) {
+    if (remainingMs <= 0) {
+      hero.textContent = '0h 0m';
+    } else {
+      const h = Math.floor(remainingMs / 3600000);
+      const m = Math.floor((remainingMs % 3600000) / 60000);
+      hero.textContent = `${h}h ${m}m`;
+    }
+  }
+}
+
+document.getElementById('return-duty-btn')?.addEventListener('click', () => {
+  const btn = document.getElementById('return-duty-btn');
+  btn.textContent = 'Returning…';
+  btn.disabled = true;
+  setTimeout(() => switchMode('plan'), 600);
+});
+
+// ─── Upcoming flights toggle ────────────────────────────────
+document.querySelectorAll('.toggle-btn[data-upcoming]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.toggle-btn[data-upcoming]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const view = btn.dataset.upcoming;
+    document.getElementById('upcoming-week').style.display  = view === 'week'  ? 'block' : 'none';
+    document.getElementById('upcoming-month').style.display = view === 'month' ? 'block' : 'none';
+  });
+});
+
+// ─── AI floating panel ──────────────────────────────────────
+const aiFloatBtn   = document.getElementById('ai-float-btn');
+const aiPanel      = document.getElementById('ai-panel');
+const aiPanelClose = document.getElementById('ai-panel-close');
+const aiMsgs       = document.getElementById('ai-panel-msgs');
+const aiInput      = document.getElementById('ai-panel-input');
+const aiSendBtn    = document.getElementById('ai-panel-send');
+
+function toggleAiPanel(forceOpen) {
+  const open = forceOpen !== undefined ? forceOpen : !aiPanel.classList.contains('open');
+  aiPanel.classList.toggle('open', open);
+  aiFloatBtn.classList.toggle('open', open);
+  if (open) aiInput.focus();
+}
+
+aiFloatBtn.addEventListener('click', () => toggleAiPanel());
+aiPanelClose.addEventListener('click', () => toggleAiPanel(false));
+
+const aiKnowledge = [
+  { keys: ['gate'],                       reply: 'Your gate was updated to B19 about 2 hours ago — 11-minute walk from the crew lounge. Recommend departing by 06:38 to board on time.' },
+  { keys: ['weather', 'wind', 'vis'],     reply: 'JFK right now: 34°F, overcast, wind 12 kt NW, vis 10 sm. LAX on arrival: 72°F and clear. No weather holds expected on either end.' },
+  { keys: ['turbulence', 'bump', 'rough'],reply: 'Turbulence reported at FL360 over Nevada. Three of your last five JFK–LAX runs deviated via FL340. Dispatch has already pre-approved that alternate.' },
+  { keys: ['delay', 'on time', 'status', 'late'], reply: 'AA 204 is currently on time. Pushback 07:00, wheels up 07:15. No ATC delays on the corridor right now.' },
+  { keys: ['load', 'passenger', 'pax'],   reply: '187 passengers confirmed — 86% load factor out of 218 seats. Cabin crew has the full manifest loaded.' },
+  { keys: ['crew'],                        reply: 'All 6 crew members are checked in and ready. F/O R. Chen confirmed at 04:15. Full cabin manifest is loaded.' },
+  { keys: ['fuel', 'aircraft', 'plane'],  reply: "You're on a B767-300 today. Fuel load confirmed by ground crew and aligns with the FL380 preferred routing from dispatch." },
+  { keys: ['route', 'altitude', 'fl'],    reply: 'Dispatch recommends FL380. Given the turbulence at FL360 over Nevada, FL340 is pre-approved and has been effective on your last three westbound runs.' },
+  { keys: ['report', 'check-in', 'report time'], reply: 'Report time is 06:00. Gate B19 closes 06:50. You\'re currently on track.' },
+  { keys: ['duration', 'how long', 'flight time'], reply: 'Block time for AA 204 is 5h 47m. Scheduled arrival LAX 13:02 local.' },
+];
+
+function getAiReply(text) {
+  const q = text.toLowerCase();
+  for (const item of aiKnowledge) {
+    if (item.keys.some(k => q.includes(k))) return item.reply;
+  }
+  return "I can help with your gate, weather, flight status, crew, turbulence, route, or anything else about AA 204 today. What would you like to know?";
+}
+
+function appendMsg(text, who) {
+  const wrap = document.createElement('div');
+  wrap.className = `ai-msg ai-msg--${who}`;
+  const p = document.createElement('p');
+  p.className = 'ai-msg__text';
+  p.textContent = text;
+  wrap.appendChild(p);
+  aiMsgs.appendChild(wrap);
+  aiMsgs.scrollTop = aiMsgs.scrollHeight;
+  return wrap;
+}
+
+function sendMessage() {
+  const text = aiInput.value.trim();
+  if (!text) return;
+  aiInput.value = '';
+  appendMsg(text, 'user');
+  const typing = appendMsg('Thinking…', 'ai');
+  typing.classList.add('ai-msg--typing');
+  setTimeout(() => {
+    typing.remove();
+    appendMsg(getAiReply(text), 'ai');
+  }, 700 + Math.random() * 500);
+}
+
+aiSendBtn.addEventListener('click', sendMessage);
+aiInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
 
 // ─── AI pill feedback ───────────────────────────────────────
 document.querySelectorAll('.ai-pill').forEach(pill => {
