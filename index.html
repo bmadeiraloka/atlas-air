@@ -311,24 +311,37 @@
             </div>
 
             <!-- My role -->
-            <div class="wakeup-widget wakeup-widget--my-role">
-              <div class="wakeup-widget__label">Your assignment</div>
-              <div class="wakeup-widget__role-badge">TW</div>
-              <div class="wakeup-widget__role-title">Purser T. Williams</div>
-              <div class="wakeup-widget__role-sub">Lead Cabin · AA 204</div>
-              <div class="wakeup-widget__role-tags">
-                <div class="wakeup-widget__role-tag">
-                  <div class="wakeup-widget__role-tag-dot"></div>
-                  Door 1L — primary station
+            <div class="wakeup-widget wakeup-widget--my-role" id="assignment-card">
+              <div class="wakeup-widget__label">Your duties</div>
+              <div class="assignment-header">
+                <div class="wakeup-widget__role-badge">TW</div>
+                <div>
+                  <div class="wakeup-widget__role-title">Purser T. Williams</div>
+                  <div class="wakeup-widget__role-sub">Lead Cabin · AA 204</div>
                 </div>
-                <div class="wakeup-widget__role-tag">
-                  <div class="wakeup-widget__role-tag-dot"></div>
-                  Safety demo lead
+              </div>
+              <div class="assignment-chips">
+                <div class="assignment-chip assignment-chip--blue">Door 1L</div>
+                <div class="assignment-chip">Safety Lead</div>
+                <div class="assignment-chip">Fwd Galley</div>
+              </div>
+              <div class="assignment-tasks">
+                <div class="assignment-task">
+                  <div class="assignment-task__check"></div>
+                  <span>Pre-flight safety check</span>
                 </div>
-                <div class="wakeup-widget__role-tag">
-                  <div class="wakeup-widget__role-tag-dot"></div>
-                  Galley: Forward
+                <div class="assignment-task">
+                  <div class="assignment-task__check"></div>
+                  <span>Galley setup</span>
                 </div>
+                <div class="assignment-task">
+                  <div class="assignment-task__check"></div>
+                  <span>Boarding positions</span>
+                </div>
+              </div>
+              <div class="assignment-cta">
+                View full brief
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
             </div>
 
@@ -377,8 +390,100 @@
 
           </div>
 
+          <button class="wakeup__cta" id="wakeup-cta">I'm awake — show my day</button>
+
         </div>
       </div>
+
+      <!-- Flight brief panel -->
+      <div class="brief-panel" id="brief-panel">
+        <div class="brief-panel__inner">
+          <div class="brief-panel__header">
+            <div>
+              <div class="brief-panel__label">Flight brief</div>
+              <div class="brief-panel__title">AA 204 · JFK → LAX</div>
+            </div>
+            <button class="brief-panel__close" id="brief-close">✕</button>
+          </div>
+
+          <div class="brief-panel__body">
+
+            <!-- Identity -->
+            <div class="brief-section">
+              <div class="brief-section__heading">Your role</div>
+              <div class="brief-role-row">
+                <div class="brief-role-avatar">TW</div>
+                <div>
+                  <div class="brief-role-name">Purser T. Williams</div>
+                  <div class="brief-role-sub">Lead Cabin · Door 1L · Forward Galley</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pre-flight checklist -->
+            <div class="brief-section">
+              <div class="brief-section__heading">Pre-flight checklist</div>
+              <div class="brief-checklist">
+                <label class="brief-check-item"><input type="checkbox"> <span>Door 1L armed &amp; crosscheck complete</span></label>
+                <label class="brief-check-item"><input type="checkbox"> <span>Emergency equipment checked (O₂, life vest, extinguisher)</span></label>
+                <label class="brief-check-item"><input type="checkbox"> <span>Forward galley loaded &amp; secured</span></label>
+                <label class="brief-check-item"><input type="checkbox"> <span>Cabin crew briefed on special passengers (2 unaccompanied minors, row 14)</span></label>
+                <label class="brief-check-item"><input type="checkbox"> <span>Safety demo assigned &amp; confirmed with crew</span></label>
+                <label class="brief-check-item"><input type="checkbox"> <span>Boarding positions confirmed with gate agent</span></label>
+              </div>
+            </div>
+
+            <!-- Service schedule -->
+            <div class="brief-section">
+              <div class="brief-section__heading">Service schedule</div>
+              <div class="brief-timeline">
+                <div class="brief-tl-item">
+                  <div class="brief-tl-time">07:15</div>
+                  <div class="brief-tl-dot brief-tl-dot--blue"></div>
+                  <div class="brief-tl-content">Departure · safety demo</div>
+                </div>
+                <div class="brief-tl-item">
+                  <div class="brief-tl-time">08:00</div>
+                  <div class="brief-tl-dot"></div>
+                  <div class="brief-tl-content">Beverage service — rows 1–15</div>
+                </div>
+                <div class="brief-tl-item">
+                  <div class="brief-tl-time">08:45</div>
+                  <div class="brief-tl-dot"></div>
+                  <div class="brief-tl-content">Meal service — forward cabin</div>
+                </div>
+                <div class="brief-tl-item">
+                  <div class="brief-tl-time">11:30</div>
+                  <div class="brief-tl-dot"></div>
+                  <div class="brief-tl-content">Pre-arrival snack &amp; cabin prep</div>
+                </div>
+                <div class="brief-tl-item">
+                  <div class="brief-tl-time">12:45</div>
+                  <div class="brief-tl-dot"></div>
+                  <div class="brief-tl-content">Seats upright, tray tables stowed</div>
+                </div>
+                <div class="brief-tl-item">
+                  <div class="brief-tl-time">13:02</div>
+                  <div class="brief-tl-dot brief-tl-dot--green"></div>
+                  <div class="brief-tl-content">Arrival LAX · door disarm</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="brief-section">
+              <div class="brief-section__heading">Crew notes</div>
+              <div class="brief-notes">
+                <div class="brief-note">2 unaccompanied minors in rows 14A &amp; 14B — check in at boarding</div>
+                <div class="brief-note">Passenger in 7C has nut allergy — no nut products in forward service</div>
+                <div class="brief-note">Full load 187/218 — expect slow boarding</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="brief-backdrop" id="brief-backdrop"></div>
 
       <!-- Schedule view -->
       <div class="schedule-view" id="schedule-view" style="display:none;">

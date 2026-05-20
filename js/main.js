@@ -1,3 +1,25 @@
+// ─── Flight brief panel ────────────────────────────────────
+const assignmentCard = document.getElementById('assignment-card');
+const briefPanel     = document.getElementById('brief-panel');
+const briefBackdrop  = document.getElementById('brief-backdrop');
+const briefClose     = document.getElementById('brief-close');
+
+function openBrief() {
+  briefPanel.classList.add('active');
+  briefBackdrop.classList.add('active');
+}
+
+function closeBrief() {
+  briefPanel.classList.remove('active');
+  briefBackdrop.classList.remove('active');
+}
+
+if (assignmentCard) assignmentCard.addEventListener('click', () => {
+  document.getElementById('wakeup-cta').click();
+});
+if (briefClose)    briefClose.addEventListener('click', closeBrief);
+if (briefBackdrop) briefBackdrop.addEventListener('click', closeBrief);
+
 // ─── Live clock ────────────────────────────────────────────
 function updateClock() {
   const now = new Date();

@@ -933,28 +933,32 @@ body {
 
 .wakeup-widget__checkpoints {
   display: flex;
-  flex-direction: column;
-  gap: 0;
+  flex-direction: row;
+  align-items: flex-start;
   border-top: 1px solid var(--border);
-  padding-top: 12px;
+  padding-top: 14px;
+  gap: 0;
 }
 
 .wakeup-widget__checkpoint {
+  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 6px 0;
   position: relative;
+  gap: 6px;
 }
 
+/* connecting line between dots */
 .wakeup-widget__checkpoint + .wakeup-widget__checkpoint::before {
   content: '';
   position: absolute;
-  left: 5px;
-  top: -6px;
-  width: 1px;
-  height: 6px;
+  left: -50%;
+  top: 5px;
+  width: 100%;
+  height: 1px;
   background: var(--border2);
+  z-index: 0;
 }
 
 .wakeup-widget__checkpoint-dot {
@@ -963,6 +967,8 @@ body {
   border-radius: 50%;
   background: var(--blue);
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .wakeup-widget__checkpoint-dot--dim {
@@ -972,18 +978,295 @@ body {
 
 .wakeup-widget__checkpoint-info {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  flex: 1;
+  gap: 2px;
 }
 
 .wakeup-widget__checkpoint--next .wakeup-widget__checkpoint-name {
   color: var(--text);
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.wakeup-widget__checkpoint-name { font-size: 13px; color: var(--muted); }
+.wakeup-widget__checkpoint--next .wakeup-widget__checkpoint-time {
+  color: var(--blue);
+}
+
+.wakeup-widget__checkpoint-name { font-size: 11px; color: var(--muted); text-align: center; }
 .wakeup-widget__checkpoint-time { font-size: 13px; font-weight: 600; color: var(--text-2); }
+
+/* Assignment card */
+.wakeup-widget--my-role {
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.wakeup-widget--my-role:hover {
+  border-color: var(--blue);
+  transform: translateY(-1px);
+}
+
+.assignment-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.assignment-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.assignment-chip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  color: var(--muted);
+}
+
+.assignment-chip--blue {
+  background: var(--blue-soft);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.assignment-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.assignment-task {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.assignment-task__check {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--border2);
+  flex-shrink: 0;
+}
+
+.assignment-cta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+/* Flight brief panel */
+.brief-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 100;
+}
+
+.brief-backdrop.active { display: block; }
+
+.brief-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  max-width: 100vw;
+  height: 100%;
+  background: var(--surface);
+  border-left: 1px solid var(--border2);
+  z-index: 101;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.brief-panel.active { transform: translateX(0); }
+
+.brief-panel__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.brief-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.brief-panel__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.brief-panel__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.brief-panel__close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.brief-panel__close:hover { background: var(--surface2); color: var(--text); }
+
+.brief-panel__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.brief-section__heading {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.brief-role-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brief-role-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blue-soft);
+  border: 1.5px solid var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.brief-role-name { font-size: 15px; font-weight: 700; color: var(--text); }
+.brief-role-sub  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* Checklist */
+.brief-checklist { display: flex; flex-direction: column; gap: 10px; }
+
+.brief-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-2);
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.brief-check-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  accent-color: var(--blue);
+  flex-shrink: 0;
+  margin-top: 1px;
+  cursor: pointer;
+}
+
+.brief-check-item:has(input:checked) span {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+/* Service timeline */
+.brief-timeline { display: flex; flex-direction: column; gap: 0; }
+
+.brief-tl-item {
+  display: grid;
+  grid-template-columns: 44px 14px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  position: relative;
+}
+
+.brief-tl-item + .brief-tl-item .brief-tl-dot::before {
+  content: '';
+  position: absolute;
+  left: 54px;
+  top: -8px;
+  width: 1px;
+  height: 8px;
+  background: var(--border2);
+}
+
+.brief-tl-time { font-size: 11px; font-weight: 600; color: var(--muted); text-align: right; }
+
+.brief-tl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border2);
+  position: relative;
+  justify-self: center;
+}
+
+.brief-tl-dot--blue  { background: var(--blue);  border-color: var(--blue); }
+.brief-tl-dot--green { background: var(--kazan); border-color: var(--kazan); }
+
+.brief-tl-content { font-size: 13px; color: var(--text-2); }
+
+/* Notes */
+.brief-notes { display: flex; flex-direction: column; gap: 8px; }
+
+.brief-note {
+  font-size: 13px;
+  color: var(--text-2);
+  padding: 10px 12px;
+  background: var(--surface2);
+  border-left: 2px solid var(--blue);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  line-height: 1.5;
+}
 
 /* My role card */
 .wakeup-widget__role-badge {
