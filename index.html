@@ -49,11 +49,11 @@
           <div>
             <p class="plan__greeting">Good morning.</p>
             <h1 class="plan__headline" id="plan-headline">Captain, AA 204</h1>
-            <p class="plan__route" id="plan-route">JFK → LAX &ensp;·&ensp; Departs 07:15</p>
+            <p class="plan__route" id="plan-route">JFK → LAX &ensp;·&ensp; <span class="plan__local-time"><span id="live-time">05:42</span> local</span></p>
           </div>
           <div class="plan__time-badge">
-            <div class="plan__time-label">Local time</div>
-            <div class="plan__time-value" id="live-time">05:42</div>
+            <div class="plan__time-label">Departs</div>
+            <div class="plan__time-value">07:15</div>
           </div>
         </div>
 
@@ -79,10 +79,11 @@
             <div class="card__meta-item">
               <div class="card__meta-label">Gate</div>
               <div class="card__meta-value" id="plan-gate">B22</div>
+              <span class="card__meta-tag" id="gate-tag" style="display:none">Changed</span>
             </div>
-            <div class="card__meta-item">
+            <div class="card__meta-item card__meta-item--primary">
               <div class="card__meta-label">Departs</div>
-              <div class="card__meta-value">07:15</div>
+              <div class="card__meta-value card__meta-value--primary">07:15</div>
             </div>
             <div class="card__meta-item">
               <div class="card__meta-label">Arrives</div>
@@ -101,15 +102,6 @@
               <div class="card__meta-value">187 / 218</div>
             </div>
           </div>
-        </div>
-
-        <!-- Start duty bar -->
-        <div class="duty-bar">
-          <div class="duty-bar__info">
-            <span class="duty-bar__dot"></span>
-            <span class="duty-bar__text">Report time 06:00 · Gate B22 closes 06:50</span>
-          </div>
-          <button class="duty-bar__btn" id="start-duty-btn">Start duty →</button>
         </div>
 
         <!-- Three-column secondary row -->
@@ -195,6 +187,172 @@
             </div>
           </div>
 
+        </div>
+
+        <!-- Upcoming flights -->
+        <div class="card upcoming">
+          <div class="upcoming__header">
+            <div class="upcoming__title">Upcoming flights</div>
+            <div class="upcoming__toggle">
+              <button class="toggle-btn active" data-upcoming="week">Week</button>
+              <button class="toggle-btn" data-upcoming="month">Month</button>
+            </div>
+          </div>
+
+          <!-- Weekly view -->
+          <div class="upcoming-view" id="upcoming-week">
+            <div class="upcoming-list">
+
+              <div class="upcoming-row upcoming-row--done">
+                <div class="upcoming-row__day"><div class="upcoming-row__weekday">Mon</div><div class="upcoming-row__date">18</div></div>
+                <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 192</span><span class="upcoming-row__route">BOS → JFK</span><span class="upcoming-row__times">09:15 – 10:47</span></div>
+              </div>
+
+              <div class="upcoming-row upcoming-row--off">
+                <div class="upcoming-row__day"><div class="upcoming-row__weekday">Tue</div><div class="upcoming-row__date">19</div></div>
+                <div class="upcoming-row__rest">Rest day</div>
+              </div>
+
+              <div class="upcoming-row upcoming-row--today">
+                <div class="upcoming-row__day"><div class="upcoming-row__weekday">Wed</div><div class="upcoming-row__date">20</div></div>
+                <div class="upcoming-row__flight">
+                  <span class="upcoming-row__num">AA 204</span>
+                  <span class="upcoming-row__route">JFK → LAX</span>
+                  <span class="upcoming-row__times">07:15 – 13:02</span>
+                  <span class="upcoming-row__badge upcoming-row__badge--today">Today</span>
+                </div>
+              </div>
+
+              <div class="upcoming-row">
+                <div class="upcoming-row__day"><div class="upcoming-row__weekday">Thu</div><div class="upcoming-row__date">21</div></div>
+                <div class="upcoming-row__flight">
+                  <span class="upcoming-row__num">AA 519</span>
+                  <span class="upcoming-row__route">LAX → ORD</span>
+                  <span class="upcoming-row__times">06:30 – 12:15</span>
+                  <span class="upcoming-row__badge upcoming-row__badge--ok">On time</span>
+                </div>
+              </div>
+
+              <div class="upcoming-row">
+                <div class="upcoming-row__day"><div class="upcoming-row__weekday">Fri</div><div class="upcoming-row__date">22</div></div>
+                <div class="upcoming-row__flight">
+                  <span class="upcoming-row__num">AA 087</span>
+                  <span class="upcoming-row__route">ORD → JFK</span>
+                  <span class="upcoming-row__times">14:00 – 17:30</span>
+                  <span class="upcoming-row__badge upcoming-row__badge--ok">On time</span>
+                </div>
+              </div>
+
+              <div class="upcoming-row upcoming-row--off">
+                <div class="upcoming-row__day"><div class="upcoming-row__weekday">Sat</div><div class="upcoming-row__date">23</div></div>
+                <div class="upcoming-row__rest">Rest day</div>
+              </div>
+
+              <div class="upcoming-row upcoming-row--off">
+                <div class="upcoming-row__day"><div class="upcoming-row__weekday">Sun</div><div class="upcoming-row__date">24</div></div>
+                <div class="upcoming-row__rest">Rest day</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Monthly view -->
+          <div class="upcoming-view" id="upcoming-month" style="display:none">
+
+            <div class="upcoming-week-group">
+              <div class="upcoming-week-label">May 5 – 11</div>
+              <div class="upcoming-list">
+                <div class="upcoming-row upcoming-row--done">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Mon</div><div class="upcoming-row__date">5</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 110</span><span class="upcoming-row__route">JFK → MIA</span><span class="upcoming-row__times">08:00 – 11:20</span></div>
+                </div>
+                <div class="upcoming-row upcoming-row--done">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Tue</div><div class="upcoming-row__date">6</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 315</span><span class="upcoming-row__route">MIA → JFK</span><span class="upcoming-row__times">15:30 – 18:45</span></div>
+                </div>
+                <div class="upcoming-row upcoming-row--done">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Fri</div><div class="upcoming-row__date">9</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 427</span><span class="upcoming-row__route">JFK → ORD</span><span class="upcoming-row__times">11:00 – 13:15</span></div>
+                </div>
+                <div class="upcoming-row upcoming-row--done">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Sat</div><div class="upcoming-row__date">10</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 512</span><span class="upcoming-row__route">ORD → JFK</span><span class="upcoming-row__times">16:45 – 20:10</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="upcoming-week-group">
+              <div class="upcoming-week-label">May 12 – 18</div>
+              <div class="upcoming-list">
+                <div class="upcoming-row upcoming-row--done">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Mon</div><div class="upcoming-row__date">12</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 633</span><span class="upcoming-row__route">JFK → BOS</span><span class="upcoming-row__times">07:30 – 08:45</span></div>
+                </div>
+                <div class="upcoming-row upcoming-row--done">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Tue</div><div class="upcoming-row__date">13</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 192</span><span class="upcoming-row__route">BOS → JFK</span><span class="upcoming-row__times">09:15 – 10:47</span></div>
+                </div>
+                <div class="upcoming-row upcoming-row--done">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Thu</div><div class="upcoming-row__date">15</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 077</span><span class="upcoming-row__route">JFK → DFW</span><span class="upcoming-row__times">13:00 – 16:30</span></div>
+                </div>
+                <div class="upcoming-row upcoming-row--done">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Fri</div><div class="upcoming-row__date">16</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 288</span><span class="upcoming-row__route">DFW → JFK</span><span class="upcoming-row__times">09:15 – 13:45</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="upcoming-week-group upcoming-week-group--current">
+              <div class="upcoming-week-label">May 19 – 25 &ensp;·&ensp; This week</div>
+              <div class="upcoming-list">
+                <div class="upcoming-row upcoming-row--done">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Mon</div><div class="upcoming-row__date">19</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 192</span><span class="upcoming-row__route">BOS → JFK</span><span class="upcoming-row__times">09:15 – 10:47</span></div>
+                </div>
+                <div class="upcoming-row upcoming-row--today">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Wed</div><div class="upcoming-row__date">20</div></div>
+                  <div class="upcoming-row__flight">
+                    <span class="upcoming-row__num">AA 204</span>
+                    <span class="upcoming-row__route">JFK → LAX</span>
+                    <span class="upcoming-row__times">07:15 – 13:02</span>
+                    <span class="upcoming-row__badge upcoming-row__badge--today">Today</span>
+                  </div>
+                </div>
+                <div class="upcoming-row">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Thu</div><div class="upcoming-row__date">21</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 519</span><span class="upcoming-row__route">LAX → ORD</span><span class="upcoming-row__times">06:30 – 12:15</span></div>
+                </div>
+                <div class="upcoming-row">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Fri</div><div class="upcoming-row__date">22</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 087</span><span class="upcoming-row__route">ORD → JFK</span><span class="upcoming-row__times">14:00 – 17:30</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="upcoming-week-group">
+              <div class="upcoming-week-label">May 26 – 31</div>
+              <div class="upcoming-list">
+                <div class="upcoming-row">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Mon</div><div class="upcoming-row__date">26</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 341</span><span class="upcoming-row__route">JFK → MIA</span><span class="upcoming-row__times">10:30 – 13:50</span></div>
+                </div>
+                <div class="upcoming-row">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Tue</div><div class="upcoming-row__date">27</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 282</span><span class="upcoming-row__route">MIA → ORD</span><span class="upcoming-row__times">15:00 – 17:20</span></div>
+                </div>
+                <div class="upcoming-row">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Wed</div><div class="upcoming-row__date">28</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 199</span><span class="upcoming-row__route">ORD → JFK</span><span class="upcoming-row__times">08:00 – 11:30</span></div>
+                </div>
+                <div class="upcoming-row">
+                  <div class="upcoming-row__day"><div class="upcoming-row__weekday">Fri</div><div class="upcoming-row__date">30</div></div>
+                  <div class="upcoming-row__flight"><span class="upcoming-row__num">AA 455</span><span class="upcoming-row__route">JFK → BOS</span><span class="upcoming-row__times">14:15 – 15:30</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
         <!-- AI card -->
@@ -444,6 +602,37 @@
     </div>
 
   </main>
+
+  <!-- ── AI floating panel ─────────────────────────────────── -->
+  <button class="ai-float" id="ai-float-btn" title="Ask Atlas AI">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 2c0 0 .8 3.2 2.6 5C14.4 8.8 18 10 18 10s-3.6 1.2-5.4 3c-1.8 1.8-2.6 5-2.6 5s-.8-3.2-2.6-5C5.6 11.2 2 10 2 10s3.6-1.2 5.4-3C9.2 5.2 10 2 10 2Z" fill="currentColor"/>
+      <path d="M16 2c0 0 .4 1.4 1.2 2.2.8.8 2 1.2 2 1.2s-1.2.4-2 1.2C16.4 7.4 16 9 16 9s-.4-1.6-1.2-2.4C14 5.8 13 5.4 13 5.4s1.2-.4 2-1.2C15.6 3.4 16 2 16 2Z" fill="currentColor" opacity=".6"/>
+    </svg>
+  </button>
+
+  <div class="ai-panel" id="ai-panel">
+    <div class="ai-panel__header">
+      <div class="ai-panel__title">
+        <span class="ai-panel__hd-dot"></span>
+        Atlas AI
+      </div>
+      <button class="ai-panel__close" id="ai-panel-close">&times;</button>
+    </div>
+    <div class="ai-panel__msgs" id="ai-panel-msgs">
+      <div class="ai-msg ai-msg--ai">
+        <p class="ai-msg__text">Hey Captain Morrison. Ask me anything about AA 204 or your duty today.</p>
+      </div>
+    </div>
+    <div class="ai-panel__footer">
+      <input class="ai-panel__input" id="ai-panel-input" type="text" placeholder="Ask about your flight…" autocomplete="off" />
+      <button class="ai-panel__send" id="ai-panel-send">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <path d="M13.5 7.5L1.5 1.5l2.5 6-2.5 6 12-6Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>
