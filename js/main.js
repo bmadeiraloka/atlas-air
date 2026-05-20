@@ -1,3 +1,25 @@
+// ─── Flight brief panel ────────────────────────────────────
+const assignmentCard = document.getElementById('assignment-card');
+const briefPanel     = document.getElementById('brief-panel');
+const briefBackdrop  = document.getElementById('brief-backdrop');
+const briefClose     = document.getElementById('brief-close');
+
+function openBrief() {
+  briefPanel.classList.add('active');
+  briefBackdrop.classList.add('active');
+}
+
+function closeBrief() {
+  briefPanel.classList.remove('active');
+  briefBackdrop.classList.remove('active');
+}
+
+if (assignmentCard) assignmentCard.addEventListener('click', () => {
+  document.getElementById('wakeup-cta').click();
+});
+if (briefClose)    briefClose.addEventListener('click', closeBrief);
+if (briefBackdrop) briefBackdrop.addEventListener('click', closeBrief);
+
 // ─── Live clock ────────────────────────────────────────────
 function updateClock() {
   const now = new Date();
@@ -13,25 +35,6 @@ updateClock();
 setInterval(updateClock, 10000);
 updateRestCountdown();
 setInterval(updateRestCountdown, 60000);
-
-// ─── Live field updates ─────────────────────────────────────
-function applyFieldUpdate(id, newValue, tagId) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.textContent = newValue;
-  el.classList.remove('card__meta-value--updated');
-  void el.offsetWidth; // reflow to restart animation
-  el.classList.add('card__meta-value--updated');
-  el.addEventListener('animationend', () => el.classList.remove('card__meta-value--updated'), { once: true });
-  if (tagId) {
-    const tag = document.getElementById(tagId);
-    if (tag) tag.style.display = 'inline-block';
-  }
-}
-
-function triggerFlightUpdates() {
-  applyFieldUpdate('plan-gate', 'B19', 'gate-tag');
-}
 
 // ─── Mode switcher ──────────────────────────────────────────
 const modeBtns = document.querySelectorAll('.mode-btn');
@@ -60,7 +63,7 @@ function switchMode(mode) {
     if (card) {
       card.style.display = 'none';
       clearTimeout(aiTimers.plan);
-      aiTimers.plan = setTimeout(() => { card.style.display = 'block'; triggerFlightUpdates(); }, 2000);
+      aiTimers.plan = setTimeout(() => { card.style.display = 'block'; }, 2000);
     }
   }
 }
@@ -70,10 +73,7 @@ modeBtns.forEach(btn => btn.addEventListener('click', () => switchMode(btn.datas
 // Show AI card 2s after page load
 setTimeout(() => {
   const card = document.getElementById('plan-ai-card');
-  if (card && currentMode === 'plan') {
-    card.style.display = 'block';
-    triggerFlightUpdates();
-  }
+  if (card && currentMode === 'plan') card.style.display = 'block';
 }, 2000);
 
 // ─── Start duty ────────────────────────────────────────────
@@ -255,6 +255,7 @@ function sendMessage() {
 
 aiSendBtn.addEventListener('click', sendMessage);
 aiInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
+
 // ─── AI pill feedback ───────────────────────────────────────
 document.querySelectorAll('.ai-pill').forEach(pill => {
   pill.addEventListener('click', function () {
