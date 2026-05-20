@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crew Central — Atlas Air</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ── Top navigation ───────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar__brand">
+      <div class="topbar__logo">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L20 8.5V19H14V14H8V19H2V8.5L11 2Z" fill="#5BAEF5"/></svg>
+      </div>
+      <div>
+        <div class="topbar__product">Crew Central</div>
+        <div class="topbar__airline">Atlas Air</div>
+      </div>
+    </div>
+
+    <nav class="topbar__modes" id="mode-switcher">
+      <button class="mode-btn active" data-mode="plan">Plan</button>
+      <button class="mode-btn" data-mode="flight">Flight</button>
+      <button class="mode-btn" data-mode="rest">Rest</button>
+    </nav>
+
+    <div class="topbar__right">
+      <div class="topbar__pilot-badge">
+        <span class="topbar__pilot-dot"></span>
+        Pilot-in-Command
+      </div>
+      <div class="topbar__avatar">JM</div>
+    </div>
+  </header>
+
+  <!-- ── Main content ──────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- ── PLAN MODE ────────────────────────────────────────── -->
+    <div class="screen screen--plan active" id="screen-plan">
+      <div class="container">
+
+        <div class="plan__header">
+          <div>
+            <p class="plan__greeting">Good morning.</p>
+            <h1 class="plan__headline" id="plan-headline">Captain, AA 204</h1>
+            <p class="plan__route" id="plan-route">JFK → LAX &ensp;·&ensp; Departs 07:15</p>
+          </div>
+          <div class="plan__time-badge">
+            <div class="plan__time-label">Local time</div>
+            <div class="plan__time-value" id="live-time">05:42</div>
+          </div>
+        </div>
+
+        <!-- Flight card — full width -->
+        <div class="card card--flight">
+          <div class="card__label">Next flight</div>
+          <div class="card__flight-row">
+            <div class="card__airport">
+              <div class="card__iata">JFK</div>
+              <div class="card__city">New York</div>
+            </div>
+            <div class="card__flight-line">
+              <div class="card__flight-num">AA 204</div>
+              <div class="card__line-bar"><span></span></div>
+              <div class="card__duration">5h 47m</div>
+            </div>
+            <div class="card__airport card__airport--right">
+              <div class="card__iata">LAX</div>
+              <div class="card__city">Los Angeles</div>
+            </div>
+          </div>
+          <div class="card__meta-row">
+            <div class="card__meta-item">
+              <div class="card__meta-label">Gate</div>
+              <div class="card__meta-value" id="plan-gate">B22</div>
+            </div>
+            <div class="card__meta-item">
+              <div class="card__meta-label">Departs</div>
+              <div class="card__meta-value">07:15</div>
+            </div>
+            <div class="card__meta-item">
+              <div class="card__meta-label">Arrives</div>
+              <div class="card__meta-value">13:02 LAX</div>
+            </div>
+            <div class="card__meta-item">
+              <div class="card__meta-label">Aircraft</div>
+              <div class="card__meta-value" id="plan-aircraft">B767-300</div>
+            </div>
+            <div class="card__meta-item">
+              <div class="card__meta-label">Status</div>
+              <div class="card__meta-value card__meta-value--ok">On time</div>
+            </div>
+            <div class="card__meta-item">
+              <div class="card__meta-label">Load</div>
+              <div class="card__meta-value">187 / 218</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Three-column secondary row -->
+        <div class="plan__row">
+
+          <!-- Weather -->
+          <div class="card card--weather">
+            <div class="card__label">Weather · JFK</div>
+            <div class="card__weather-body">
+              <div class="card__temp">34°F</div>
+              <div class="card__weather-detail">
+                <div class="card__weather-cond">Overcast</div>
+                <div class="card__weather-wind">Wind 12 kt NW</div>
+                <div class="card__weather-vis">Vis 10 sm</div>
+              </div>
+            </div>
+            <div class="card__weather-dest">
+              <span class="card__weather-dest-label">LAX on arrival</span>
+              <span class="card__weather-dest-val">72°F · Clear</span>
+            </div>
+          </div>
+
+          <!-- Crew -->
+          <div class="card card--crew">
+            <div class="card__label">Your crew</div>
+            <div class="card__crew-list" id="plan-crew-list">
+              <div class="crew-member crew-member--self">
+                <div class="crew-member__dot crew-member__dot--rausch"></div>
+                <div>
+                  <div class="crew-member__name">You — Capt. J. Morrison</div>
+                  <div class="crew-member__role">Pilot-in-Command</div>
+                </div>
+              </div>
+              <div class="crew-member">
+                <div class="crew-member__dot"></div>
+                <div>
+                  <div class="crew-member__name">F/O R. Chen</div>
+                  <div class="crew-member__role">First Officer</div>
+                </div>
+              </div>
+              <div class="crew-member">
+                <div class="crew-member__dot"></div>
+                <div>
+                  <div class="crew-member__name">Purser T. Williams</div>
+                  <div class="crew-member__role">Lead Cabin</div>
+                </div>
+              </div>
+              <div class="crew-member">
+                <div class="crew-member__dot crew-member__dot--dim"></div>
+                <div>
+                  <div class="crew-member__name">+4 cabin crew</div>
+                  <div class="crew-member__role">Full manifest ready</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Briefing -->
+          <div class="card card--briefing">
+            <div class="card__label">Crew briefing</div>
+            <div class="card__briefing-items" id="plan-briefing-items">
+              <div class="briefing-item briefing-item--unread">
+                <div class="briefing-item__dot"></div>
+                <div>
+                  <div class="briefing-item__title">NOTAM JFK B22 — construction notice</div>
+                  <div class="briefing-item__time">Posted 02:14</div>
+                </div>
+              </div>
+              <div class="briefing-item">
+                <div class="briefing-item__dot briefing-item__dot--read"></div>
+                <div>
+                  <div class="briefing-item__title">Route update: FL380 preferred per dispatch</div>
+                  <div class="briefing-item__time">Posted 23:55 yesterday</div>
+                </div>
+              </div>
+              <div class="briefing-item">
+                <div class="briefing-item__dot briefing-item__dot--read"></div>
+                <div>
+                  <div class="briefing-item__title">Atlas SOP-07 reminder: fatigue reporting</div>
+                  <div class="briefing-item__time">Standing notice</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- AI card -->
+        <div class="ai-card" id="plan-ai-card" style="display:none;">
+          <div class="ai-card__header">
+            <div class="ai-card__label">
+              <span class="ai-card__dot"></span>
+              Surfaced before you asked
+            </div>
+            <button class="ai-card__dismiss" id="plan-ai-dismiss">&times;</button>
+          </div>
+          <p class="ai-card__insight" id="plan-ai-insight">Gate B22 changed to B19 — 11 min walk from crew lounge. Depart by 06:38 to board on time.</p>
+          <div class="ai-card__pills">
+            <button class="ai-pill" id="plan-pill-1">Notify my crew</button>
+            <button class="ai-pill" id="plan-pill-2">Show new route</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── FLIGHT MODE ──────────────────────────────────────── -->
+    <div class="screen screen--flight" id="screen-flight">
+
+      <!-- Wake-up overlay -->
+      <div class="wakeup" id="wakeup-overlay">
+        <div class="wakeup__inner">
+          <div class="wakeup__time" id="wakeup-time">05:42</div>
+          <div class="wakeup__date">Tuesday, 20 May 2026</div>
+          <div class="wakeup__context">AA 204 departs in 1h 33m</div>
+          <button class="wakeup__cta" id="wakeup-cta">I'm awake — show my day</button>
+        </div>
+      </div>
+
+      <!-- Schedule view -->
+      <div class="schedule-view" id="schedule-view" style="display:none;">
+        <div class="container container--narrow">
+
+          <div class="schedule-view__header">
+            <div>
+              <p class="schedule-view__label">Active duty</p>
+              <h2 class="schedule-view__headline" id="sched-headline">AA 204 · JFK → LAX</h2>
+            </div>
+            <div class="schedule-view__status">On time</div>
+          </div>
+
+          <div class="schedule-layout">
+
+            <!-- Timeline -->
+            <div class="schedule-timeline">
+              <div class="timeline-item timeline-item--done">
+                <div class="timeline-dot timeline-dot--done"></div>
+                <div class="timeline-content">
+                  <div class="timeline-title">Check-in complete</div>
+                  <div class="timeline-time">04:30</div>
+                </div>
+              </div>
+              <div class="timeline-item timeline-item--active">
+                <div class="timeline-dot timeline-dot--active"></div>
+                <div class="timeline-content">
+                  <div class="timeline-title">Pre-flight briefing</div>
+                  <div class="timeline-time">05:45 — now</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-title">Board at Gate B19</div>
+                  <div class="timeline-time">06:45</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-title">Pushback</div>
+                  <div class="timeline-time">07:00</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-title">Depart JFK</div>
+                  <div class="timeline-time">07:15</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-title">Arrive LAX</div>
+                  <div class="timeline-time">13:02 local</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right panel -->
+            <div class="schedule-aside">
+              <div class="schedule-meta">
+                <div class="schedule-meta__item">
+                  <div class="schedule-meta__label">Gate</div>
+                  <div class="schedule-meta__value" id="sched-gate">B19</div>
+                </div>
+                <div class="schedule-meta__item">
+                  <div class="schedule-meta__label">Aircraft</div>
+                  <div class="schedule-meta__value" id="sched-aircraft">B767-300</div>
+                </div>
+                <div class="schedule-meta__item">
+                  <div class="schedule-meta__label">Crew ready</div>
+                  <div class="schedule-meta__value">6 / 6</div>
+                </div>
+              </div>
+
+              <div class="ai-card ai-card--flight" id="flight-ai-card" style="display:none;">
+                <div class="ai-card__header">
+                  <div class="ai-card__label">
+                    <span class="ai-card__dot"></span>
+                    Surfaced before you asked
+                  </div>
+                  <button class="ai-card__dismiss" id="flight-ai-dismiss">&times;</button>
+                </div>
+                <p class="ai-card__insight">Turbulence reported FL360 over Nevada. 3 of your last 5 JFK–LAX flights deviated via FL340. Dispatch pre-approved the alternate.</p>
+                <div class="ai-card__pills">
+                  <button class="ai-pill">Accept FL340</button>
+                  <button class="ai-pill">Message dispatch</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── REST MODE ────────────────────────────────────────── -->
+    <div class="screen screen--rest" id="screen-rest">
+      <div class="container container--narrow">
+
+        <div class="rest__header">
+          <p class="rest__label">Rest window</p>
+          <h1 class="rest__headline">You're off duty.</h1>
+          <p class="rest__sub">Flight AA 204 completed. Well done.</p>
+        </div>
+
+        <div class="rest__layout">
+
+          <div class="rest__main">
+            <div class="rest__window-card">
+              <div class="rest__window-row">
+                <div class="rest__window-item">
+                  <div class="rest__window-label">Rest begins</div>
+                  <div class="rest__window-time">14:15 LAX</div>
+                </div>
+                <div class="rest__window-divider"></div>
+                <div class="rest__window-item rest__window-item--right">
+                  <div class="rest__window-label">Rest ends</div>
+                  <div class="rest__window-time">22:00 LAX</div>
+                </div>
+              </div>
+              <div class="rest__window-bar">
+                <div class="rest__window-fill" style="width:28%"></div>
+              </div>
+              <p class="rest__window-calc">7h 45m minimum · 8h allocated · FAR 117 compliant</p>
+            </div>
+
+            <div class="rest__notices card">
+              <div class="card__label">While you rest</div>
+              <div class="rest__notice">
+                <div class="rest__notice-dot"></div>
+                <span>Hotel shuttle leaves LAX arrivals at 14:45</span>
+              </div>
+              <div class="rest__notice">
+                <div class="rest__notice-dot"></div>
+                <span>Your duty hours reset at 00:01 local</span>
+              </div>
+              <div class="rest__notice rest__notice--quiet">
+                <div class="rest__notice-dot rest__notice-dot--dim"></div>
+                <span>Notifications silenced until 04:30</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="rest__side">
+            <div class="rest__next-duty card">
+              <div class="card__label">Next duty cycle</div>
+              <div class="rest__next-flight">
+                <div class="rest__next-item">
+                  <div class="rest__next-label">Flight</div>
+                  <div class="rest__next-value">AA 519</div>
+                </div>
+                <div class="rest__next-item">
+                  <div class="rest__next-label">Route</div>
+                  <div class="rest__next-value">LAX → ORD</div>
+                </div>
+                <div class="rest__next-item">
+                  <div class="rest__next-label">Report</div>
+                  <div class="rest__next-value">05:30 tomorrow</div>
+                </div>
+                <div class="rest__next-item">
+                  <div class="rest__next-label">Gate</div>
+                  <div class="rest__next-value">TBC</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
