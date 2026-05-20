@@ -48,6 +48,30 @@ setTimeout(() => {
   if (card && currentMode === 'plan') card.style.display = 'block';
 }, 2000);
 
+// ─── Start duty ────────────────────────────────────────────
+document.getElementById('start-duty-btn')?.addEventListener('click', () => {
+  const btn = document.getElementById('start-duty-btn');
+  btn.textContent = 'Starting…';
+  btn.disabled = true;
+
+  // Lock Rest tab while on duty
+  document.getElementById('rest-tab')?.classList.add('locked');
+
+  setTimeout(() => switchMode('flight'), 600);
+});
+
+// ─── Complete flight ────────────────────────────────────────
+document.getElementById('complete-flight-btn')?.addEventListener('click', () => {
+  const btn = document.getElementById('complete-flight-btn');
+  btn.textContent = 'Completing…';
+  btn.disabled = true;
+
+  // Unlock Rest tab
+  document.getElementById('rest-tab')?.classList.remove('locked');
+
+  setTimeout(() => switchMode('rest'), 600);
+});
+
 // ─── AI card dismiss ────────────────────────────────────────
 document.getElementById('plan-ai-dismiss')?.addEventListener('click', () => {
   document.getElementById('plan-ai-card').style.display = 'none';
@@ -62,11 +86,13 @@ function showWakeup() {
   const overlay = document.getElementById('wakeup-overlay');
   const sv      = document.getElementById('schedule-view');
   const fc      = document.getElementById('flight-ai-card');
+  const cb      = document.getElementById('complete-bar');
   overlay.style.opacity    = '';
   overlay.style.transition = '';
   overlay.style.display    = 'flex';
   sv.style.display         = 'none';
   if (fc) fc.style.display = 'none';
+  if (cb) cb.style.display = 'none';
 }
 
 document.getElementById('wakeup-cta')?.addEventListener('click', () => {
@@ -79,11 +105,17 @@ document.getElementById('wakeup-cta')?.addEventListener('click', () => {
     const sv = document.getElementById('schedule-view');
     sv.style.display = 'flex';
 
+    // Show complete bar and AI card with staggered delays
     clearTimeout(aiTimers.flight);
     aiTimers.flight = setTimeout(() => {
       const fc = document.getElementById('flight-ai-card');
       if (fc) fc.style.display = 'block';
     }, 2000);
+
+    setTimeout(() => {
+      const cb = document.getElementById('complete-bar');
+      if (cb) cb.style.display = 'flex';
+    }, 4000);
   }, 400);
 });
 

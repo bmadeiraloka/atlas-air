@@ -133,6 +133,12 @@ body {
   color: #0D1117;
 }
 
+.mode-btn.locked {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* Right side */
 .topbar__right {
   display: flex;
@@ -267,6 +273,53 @@ body {
   letter-spacing: -0.03em;
   line-height: 1;
 }
+
+/* ─── Duty bar ───────────────────────────────────────────── */
+.duty-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--blue-soft);
+  border: 1px solid var(--blue);
+  border-radius: var(--r-xl);
+  padding: 16px 24px;
+  margin-bottom: 16px;
+}
+
+.duty-bar__info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.duty-bar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  flex-shrink: 0;
+  animation: pulse 2.5s infinite;
+}
+
+.duty-bar__btn {
+  padding: 11px 28px;
+  background: var(--blue);
+  border: none;
+  border-radius: 100px;
+  color: #0D1117;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.18s, transform 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.duty-bar__btn:hover  { opacity: 0.9; transform: scale(1.02); }
+.duty-bar__btn:active { transform: scale(0.97); }
 
 /* ─── Cards ──────────────────────────────────────────────── */
 .card {
@@ -784,6 +837,53 @@ body {
   color: var(--muted);
   margin-top: 3px;
 }
+
+/* Complete flight bar */
+.complete-bar {
+  background: var(--kazan-soft);
+  border: 1px solid var(--kazan);
+  border-radius: var(--r-xl);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  animation: fadeSlideUp 0.3s ease;
+}
+
+.complete-bar__info {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--kazan);
+}
+
+.complete-bar__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--kazan);
+  flex-shrink: 0;
+}
+
+.complete-bar__btn {
+  padding: 10px 22px;
+  background: var(--kazan);
+  border: none;
+  border-radius: 100px;
+  color: #0D1117;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.18s, transform 0.15s;
+}
+
+.complete-bar__btn:hover  { opacity: 0.9; transform: scale(1.02); }
+.complete-bar__btn:active { transform: scale(0.97); }
 
 /* Schedule aside */
 .schedule-aside {

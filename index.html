@@ -26,7 +26,7 @@
     <nav class="topbar__modes" id="mode-switcher">
       <button class="mode-btn active" data-mode="plan">Plan</button>
       <button class="mode-btn" data-mode="flight">Flight</button>
-      <button class="mode-btn" data-mode="rest">Rest</button>
+      <button class="mode-btn" data-mode="rest" id="rest-tab">Rest</button>
     </nav>
 
     <div class="topbar__right">
@@ -101,6 +101,15 @@
               <div class="card__meta-value">187 / 218</div>
             </div>
           </div>
+        </div>
+
+        <!-- Start duty bar -->
+        <div class="duty-bar">
+          <div class="duty-bar__info">
+            <span class="duty-bar__dot"></span>
+            <span class="duty-bar__text">Report time 06:00 · Gate B22 closes 06:50</span>
+          </div>
+          <button class="duty-bar__btn" id="start-duty-btn">Start duty →</button>
         </div>
 
         <!-- Three-column secondary row -->
@@ -295,6 +304,15 @@
                   <div class="schedule-meta__label">Crew ready</div>
                   <div class="schedule-meta__value">6 / 6</div>
                 </div>
+              </div>
+
+              <!-- Complete flight bar -->
+              <div class="complete-bar" id="complete-bar" style="display:none;">
+                <div class="complete-bar__info">
+                  <span class="complete-bar__dot"></span>
+                  <span>Landed LAX · 13:02 local</span>
+                </div>
+                <button class="complete-bar__btn" id="complete-flight-btn">Complete flight →</button>
               </div>
 
               <div class="ai-card ai-card--flight" id="flight-ai-card" style="display:none;">
