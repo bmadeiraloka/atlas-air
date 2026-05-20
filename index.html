@@ -348,67 +348,98 @@
 
         <div class="rest__layout">
 
-          <div class="rest__main">
-            <div class="rest__window-card">
-              <div class="rest__window-row">
-                <div class="rest__window-item">
-                  <div class="rest__window-label">Rest begins</div>
-                  <div class="rest__window-time">14:15 LAX</div>
-                </div>
-                <div class="rest__window-divider"></div>
-                <div class="rest__window-item rest__window-item--right">
-                  <div class="rest__window-label">Rest ends</div>
-                  <div class="rest__window-time">22:00 LAX</div>
-                </div>
+          <div class="rest__window-card">
+            <div class="rest__window-row">
+              <div class="rest__window-item">
+                <div class="rest__window-label">Rest begins</div>
+                <div class="rest__window-time">14:15 LAX</div>
               </div>
-              <div class="rest__window-bar">
-                <div class="rest__window-fill" style="width:28%"></div>
+              <div class="rest__window-divider"></div>
+              <div class="rest__window-item rest__window-item--right">
+                <div class="rest__window-label">Rest ends</div>
+                <div class="rest__window-time">22:00 LAX</div>
               </div>
-              <p class="rest__window-calc">7h 45m minimum · 8h allocated · FAR 117 compliant</p>
             </div>
+            <div class="rest__window-hero">
+              <div class="rest__window-hero-time" id="rest-hero-time">—</div>
+              <div class="rest__window-hero-label">remaining</div>
+            </div>
+            <div class="rest__window-bar">
+              <div class="rest__window-fill" id="rest-progress-fill"></div>
+            </div>
+            <div class="rest__window-footer">
+              <p class="rest__window-calc"><span class="rest__compliance-badge">FAR 117 ✓</span> 7h 45m min · 8h allocated</p>
+            </div>
+          </div>
 
-            <div class="rest__notices card">
-              <div class="card__label">While you rest</div>
-              <div class="rest__notice">
-                <div class="rest__notice-dot"></div>
-                <span>Hotel shuttle leaves LAX arrivals at 14:45</span>
+          <div class="rest__next-duty card">
+            <div class="card__label">Next duty cycle</div>
+            <div class="rest__next-flight">
+              <div class="rest__next-item">
+                <div class="rest__next-label">Flight</div>
+                <div class="rest__next-value">AA 519</div>
               </div>
-              <div class="rest__notice">
-                <div class="rest__notice-dot"></div>
-                <span>Your duty hours reset at 00:01 local</span>
+              <div class="rest__next-item">
+                <div class="rest__next-label">Route</div>
+                <div class="rest__next-value">LAX → ORD</div>
               </div>
-              <div class="rest__notice rest__notice--quiet">
-                <div class="rest__notice-dot rest__notice-dot--dim"></div>
-                <span>Notifications silenced until 04:30</span>
+              <div class="rest__next-item">
+                <div class="rest__next-label">Report</div>
+                <div class="rest__next-value">05:30 · Wed 21 May</div>
+              </div>
+              <div class="rest__next-item">
+                <div class="rest__next-label">Gate</div>
+                <div class="rest__next-value">TBC</div>
+              </div>
+            </div>
+            <div class="rest__notice-pill" style="margin-top:16px">
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4.5V7l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Duty hours reset at 00:01 local
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__label">Hotel shuttle</div>
+            <div class="rest__hotel-name">Departs LAX Arrivals · 14:45</div>
+            <div class="rest__hotel-address">Tom Bradley Intl Terminal, Level 1</div>
+            <div class="rest__next-flight" style="margin-top:14px">
+              <div class="rest__next-item">
+                <div class="rest__next-label">Destination</div>
+                <div class="rest__next-value">Marriott LAX</div>
+              </div>
+              <div class="rest__next-item">
+                <div class="rest__next-label">Journey</div>
+                <div class="rest__next-value">~12 min</div>
               </div>
             </div>
           </div>
 
-          <div class="rest__side">
-            <div class="rest__next-duty card">
-              <div class="card__label">Next duty cycle</div>
-              <div class="rest__next-flight">
-                <div class="rest__next-item">
-                  <div class="rest__next-label">Flight</div>
-                  <div class="rest__next-value">AA 519</div>
-                </div>
-                <div class="rest__next-item">
-                  <div class="rest__next-label">Route</div>
-                  <div class="rest__next-value">LAX → ORD</div>
-                </div>
-                <div class="rest__next-item">
-                  <div class="rest__next-label">Report</div>
-                  <div class="rest__next-value">05:30 tomorrow</div>
-                </div>
-                <div class="rest__next-item">
-                  <div class="rest__next-label">Gate</div>
-                  <div class="rest__next-value">TBC</div>
-                </div>
+          <div class="card">
+            <div class="card__label">Accommodation</div>
+            <div class="rest__hotel-name">Marriott Los Angeles LAX</div>
+            <div class="rest__hotel-address">5855 W Century Blvd, Los Angeles</div>
+            <div class="rest__next-flight" style="margin-top:14px">
+              <div class="rest__next-item">
+                <div class="rest__next-label">Confirmation</div>
+                <div class="rest__next-value">AA-74821</div>
+              </div>
+              <div class="rest__next-item">
+                <div class="rest__next-label">Check-out</div>
+                <div class="rest__next-value">22:00</div>
               </div>
             </div>
           </div>
 
         </div>
+
+        <div class="duty-bar rest__return-bar" id="rest-return-bar">
+          <div class="duty-bar__info">
+            <span class="duty-bar__dot"></span>
+            <span class="duty-bar__text">Next duty · AA 519 LAX → ORD · Report 05:30</span>
+          </div>
+          <button class="duty-bar__btn" id="return-duty-btn">Return to plan →</button>
+        </div>
+
       </div>
     </div>
 

@@ -919,6 +919,28 @@ body {
 }
 
 /* ─── Rest Mode ──────────────────────────────────────────── */
+/* ─── Rest: light mode override ─────────────────────────── */
+.screen--rest {
+  --navy:       #EEF2F9;
+  --surface:    #FFFFFF;
+  --surface2:   #EEF2F9;
+  --surface3:   #E2EAF5;
+  --border:     #DDE4EF;
+  --border2:    #C8D3E5;
+  --blue:       #1D72C9;
+  --blue-dim:   #EBF3FD;
+  --blue-soft:  rgba(29, 114, 201, 0.09);
+  --kazan:      #1A8A5A;
+  --kazan-soft: rgba(26, 138, 90, 0.10);
+  --text:       #0F172A;
+  --text-2:     #2D3A52;
+  --muted:      #64748B;
+  --dim:        #7A8BA8;
+  background:   var(--navy);
+}
+
+.screen--rest .duty-bar__btn { color: #FFFFFF; }
+
 .rest__header { margin-bottom: 28px; }
 
 .rest__label {
@@ -949,14 +971,14 @@ body {
   gap: 20px;
 }
 
-.rest__main { display: flex; flex-direction: column; gap: 16px; }
-.rest__side { display: flex; flex-direction: column; gap: 16px; }
 
 .rest__window-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-xl);
   padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .rest__window-row {
@@ -992,6 +1014,33 @@ body {
   flex-shrink: 0;
 }
 
+.rest__window-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px 0;
+}
+
+.rest__window-hero-time {
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.rest__window-hero-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
 .rest__window-bar {
   height: 4px;
   background: var(--surface3);
@@ -1003,7 +1052,7 @@ body {
 .rest__window-fill {
   height: 100%;
   background: var(--blue);
-  border-radius: 2px;
+  border-radius: 6px;
 }
 
 .rest__window-calc {
@@ -1039,6 +1088,75 @@ body {
 }
 
 .rest__notice-dot--dim { background: var(--dim); }
+
+.rest__window-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rest__window-remaining {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  white-space: nowrap;
+}
+
+.rest__compliance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--kazan-soft);
+  color: var(--kazan);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 100px;
+}
+
+.rest__notice-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  flex-shrink: 0;
+  width: 14px;
+}
+
+.rest__hotel-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.rest__hotel-address {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.rest__notices-strip {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.rest__notice-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 100px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.rest__return-bar { margin-top: 20px; margin-bottom: 0; }
 
 .rest__next-duty { height: fit-content; }
 
