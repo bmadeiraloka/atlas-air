@@ -11,6 +11,8 @@ function updateClock() {
 }
 updateClock();
 setInterval(updateClock, 10000);
+updateRestCountdown();
+setInterval(updateRestCountdown, 60000);
 
 // ─── Live field updates ─────────────────────────────────────
 function applyFieldUpdate(id, newValue, tagId) {
@@ -47,6 +49,10 @@ function switchMode(mode) {
   if (mode === 'flight') {
     showWakeup();
     clearTimeout(aiTimers.flight);
+  }
+
+  if (mode === 'rest') {
+    updateRestCountdown();
   }
 
   if (mode === 'plan') {
@@ -141,6 +147,37 @@ document.getElementById('wakeup-cta')?.addEventListener('click', () => {
   }, 400);
 });
 
+// ─── Rest countdown ─────────────────────────────────────────
+function updateRestCountdown() {
+  const now = new Date();
+  const restStart = new Date(); restStart.setHours(14, 15, 0, 0);
+  const restEnd   = new Date(); restEnd.setHours(22,  0, 0, 0);
+  const totalMs     = restEnd - restStart;
+  const remainingMs = restEnd - now;
+  const pct = Math.max(0, Math.min(100, ((now - restStart) / totalMs) * 100));
+
+  const fill = document.getElementById('rest-progress-fill');
+  if (fill) fill.style.width = `${pct.toFixed(1)}%`;
+
+  const hero = document.getElementById('rest-hero-time');
+  if (hero) {
+    if (remainingMs <= 0) {
+      hero.textContent = '0h 0m';
+    } else {
+      const h = Math.floor(remainingMs / 3600000);
+      const m = Math.floor((remainingMs % 3600000) / 60000);
+      hero.textContent = `${h}h ${m}m`;
+    }
+  }
+}
+
+document.getElementById('return-duty-btn')?.addEventListener('click', () => {
+  const btn = document.getElementById('return-duty-btn');
+  btn.textContent = 'Returning…';
+  btn.disabled = true;
+  setTimeout(() => switchMode('plan'), 600);
+});
+
 // ─── Upcoming flights toggle ────────────────────────────────
 document.querySelectorAll('.toggle-btn[data-upcoming]').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -218,7 +255,6 @@ function sendMessage() {
 
 aiSendBtn.addEventListener('click', sendMessage);
 aiInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
-
 // ─── AI pill feedback ───────────────────────────────────────
 document.querySelectorAll('.ai-pill').forEach(pill => {
   pill.addEventListener('click', function () {
